@@ -1,14 +1,17 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { use } from "react";
 import { AuthContext } from "../provider/AuthContext";
 import Swal from "sweetalert2";
 
 export default function Login() {
-  const navigate = useNavigate();
+  const navigate=useNavigate()
+  const location=useLocation()
+  const from = location?.state?.from?.pathname || '/'
+  
   const { signIn, googleSign } = use(AuthContext);
   const handleLogIn = (e) => {
     e.preventDefault();
@@ -19,7 +22,7 @@ export default function Login() {
     signIn(email, password)
       .then((data) => {
         if (data.user) {
-          navigate("/");
+          navigate(from, { replace: true })
 
           return Swal.fire({
             icon: "success",
@@ -42,7 +45,7 @@ export default function Login() {
     e.preventDefault();
     googleSign()
       .then((data) => {
-        navigate("/");
+        navigate(from, { replace: true })
         return Swal.fire({
           icon: "success",
           title: "Congratulations",
@@ -70,8 +73,8 @@ export default function Login() {
         {/* Google Sign In */}
         <Button
           onClick={handleGoogleSignIn}
-          variant="outline"
-          className="w-full flex items-center justify-center gap-2"
+          variant="outline" 
+          className="w-full flex items-center justify-center gap-2 cursor-pointer"
         >
           <FcGoogle className="text-xl" />
           Sign in with Google

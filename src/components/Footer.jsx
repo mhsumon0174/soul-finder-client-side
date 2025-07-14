@@ -8,7 +8,7 @@ import { FaInstagram, FaTwitter, FaFacebookF } from "react-icons/fa"
 export default function Footer() {
   return (
     <footer className="bg-background border-t border-border text-muted-foreground">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 text-center md:grid-cols-4 gap-10">
+      <div className="max-w-8xl mx-auto px-6 py-16 grid grid-cols-1 text-center md:grid-cols-4 gap-10">
         {/* About Section */}
         <div className="flex flex-col items-center md:items-start">
           <div className="flex items-center space-x-3 mb-4">

@@ -4,35 +4,43 @@ import HomeLayout from "../layouts/HomeLayout";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import DashboardLayout from "../layouts/DashboardLayout";
+import PrivateRoute from "../provider/PrivateRoute";
+import EditBiodataForm from "../pages/DashBoard/EditBiodataForm";
 
-const router=createBrowserRouter(
-    [
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: HomeLayout,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/register",
+        Component: Register,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    children:[
         {
-            path:'/',
-            Component:HomeLayout,
-            children:[
-                {
-                    index:true,
-                    Component:Home
-                },
-                {
-                    path:'/login',
-                    Component:Login
-                },
-                {
-                    
-                    path:'/register',
-                    Component:Register
-                
-                }
-
-            ]
-
-        },
-        {
-            path:'/*',
-            Component:Error
+            path:'/dashboard/edit-bio-data',
+            Component:EditBiodataForm
         }
     ]
-)
-export default router
+  },
+  {
+    path: "/*",
+    Component: Error,
+  },
+]);
+export default router;
