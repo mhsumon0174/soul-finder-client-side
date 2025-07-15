@@ -1,71 +1,77 @@
-"use client"
+"use client";
 import Swal from "sweetalert2";
-import { Button } from "@/components/ui/button"
-import { Link, useNavigate } from "react-router"
-import { FcGoogle } from "react-icons/fc"
-import { AuthContext } from "../provider/AuthContext"
-import { use } from "react"
+import { Button } from "@/components/ui/button";
+import { Link, useNavigate } from "react-router";
+import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../provider/AuthContext";
+import { use } from "react";
 import { saveUserInDB } from "../api/utilities";
 
 export default function Register() {
-  const navigate=useNavigate()
-  const {createUser,googleSign,setUser}=use(AuthContext)
-  const handleRegister=(e)=>{
-    e.preventDefault()
-    
+  const navigate = useNavigate();
+  const { createUser, googleSign, setUser, updateUser } = use(AuthContext);
+  const handleRegister = (e) => {
     e.preventDefault();
-    const form=e.target;
-    const formData=new FormData(form);
-    const userData=Object.fromEntries(formData.entries())
-    const {name,email,password,photoURL}=userData;
-    createUser(email,password)
-    .then((data)=>{
-      saveUserInDB(userData)
-      const user=data.user
-      if(user){
-        navigate('/')
-        setUser(user)
-        return Swal.fire({
+
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const userData = Object.fromEntries(formData.entries());
+    const { name, email, password, photoURL } = userData;
+    createUser(email, password)
+      .then((data) => {
+        saveUserInDB({ name, email, photoURL });
+        const user = data.user;
+
+        if (user) {
+          updateUser({displayName:name,photoURL})
+          .then(data=>{
+            setUser({...user,displayName:name,photoURL})
+          })
+         
+          navigate("/");
+
+          return Swal.fire({
             icon: "success",
             title: "Congratulations",
             text: "You have successfully registered and logged in",
             draggable: true,
             timer: 1400,
           });
-      }
-      
-      
-    })
-    .catch(error=>{
-      return Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: error.message,
-          });
-      
-    })
-  }
+        }
+      })
+      .catch((error) => {
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+  };
   const handleGoogleSignIn = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     googleSign()
-    .then((data)=>{
-      navigate("/");
-      return Swal.fire({
+      .then((data) => {
+        const { displayName: name, email, photoURL } = data.user;
+        saveUserInDB({ name, email, photoURL });
+
+        navigate("/");
+        return Swal.fire({
           icon: "success",
           title: "Congratulations",
           text: "You have successfully  logged in",
           draggable: true,
           timer: 1400,
         });
-    })
-    .catch(error=>{
-      return Swal.fire({
+      })
+      .catch((error) => {
+        return Swal.fire({
           icon: "error",
           title: "Oops...",
           text: error.message,
         });
-    })
-  }
+      });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -97,7 +103,10 @@ export default function Register() {
         {/* Form */}
         <form onSubmit={handleRegister} className="space-y-5">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Full Name
             </label>
             <input
@@ -111,7 +120,10 @@ export default function Register() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Email
             </label>
             <input
@@ -125,7 +137,10 @@ export default function Register() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Password
             </label>
             <input
@@ -139,7 +154,10 @@ export default function Register() {
           </div>
 
           <div>
-            <label htmlFor="photo" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="photo"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Photo URL
             </label>
             <input
@@ -165,5 +183,5 @@ export default function Register() {
         </p>
       </div>
     </div>
-  )
+  );
 }

@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { use } from "react";
 import { AuthContext } from "../provider/AuthContext";
 import Swal from "sweetalert2";
+import { saveUserInDB } from "../api/utilities";
 
 export default function Login() {
   const navigate=useNavigate()
@@ -45,6 +46,8 @@ export default function Login() {
     e.preventDefault();
     googleSign()
       .then((data) => {
+        const {displayName:name,email,photoURL}=data.user
+              saveUserInDB({name,email,photoURL})
         navigate(from, { replace: true })
         return Swal.fire({
           icon: "success",

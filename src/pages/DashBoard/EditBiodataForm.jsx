@@ -3,6 +3,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../provider/AuthContext";
 import { Button } from "@/components/ui/button";
+import Swal from "sweetalert2";
 
 export default function EditBiodataForm() {
   const { user } = use(AuthContext);
@@ -26,7 +27,16 @@ export default function EditBiodataForm() {
     try {
       const response = await axios.patch("http://localhost:3000/edit-bio-data", data);
       console.log("Server response:", response.data);
-      // You can add toast/notification here
+      if(response.data){
+         return Swal.fire({
+                    icon: "success",
+                    title: "Congratulations",
+                    text: "You Have Successfully Updated Your Data",
+                    draggable: true,
+                    timer: 1400,
+                  });
+                  
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -316,7 +326,7 @@ export default function EditBiodataForm() {
         </div>
 
         <div className="md:col-span-2 text-center">
-          <Button type="submit" className="px-6 py-2 mt-4">
+          <Button type="submit" className="cursor-pointer px-6 py-2 mt-4">
             Save & Publish
           </Button>
         </div>

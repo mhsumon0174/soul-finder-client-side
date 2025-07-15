@@ -1,5 +1,6 @@
 import React, { use, useState } from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
+import { Tooltip } from "react-tooltip";
 import { AuthContext } from "../provider/AuthContext";
 import { FaUser } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md"; 
@@ -8,6 +9,7 @@ import Swal from "sweetalert2";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = use(AuthContext);
+console.log(user);
 
   const handleLogout = () => {
     logOut()
@@ -73,41 +75,43 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-10 items-center">
-            <Link to="/" className="text-gray-700 hover:text-gray-900 font-medium transition">
+            <NavLink to="/" className="text-gray-700 hover:text-gray-900 font-medium transition">
               Home
-            </Link>
-            <Link to="/biodatas" className="text-gray-700 hover:text-gray-900 font-medium transition">
+            </NavLink>
+            <NavLink to="/biodatas" className="text-gray-700 hover:text-gray-900 font-medium transition">
               Biodatas
-            </Link>
-            <Link to="/about" className="text-gray-700 hover:text-gray-900 font-medium transition">
+            </NavLink>
+            <NavLink to="/about" className="text-gray-700 hover:text-gray-900 font-medium transition">
               About Us
-            </Link>
-            <Link to="/contact" className="text-gray-700 hover:text-gray-900 font-medium transition">
+            </NavLink>
+            <NavLink to="/contact" className="text-gray-700 hover:text-gray-900 font-medium transition">
               Contact Us
-            </Link>
+            </NavLink>
             {user && (
-              <Link
+              <NavLink
                 to="/dashboard"
                 className="text-gray-700 hover:text-gray-900 font-medium transition flex items-center gap-1"
               >
                 <MdDashboard className="text-xl" />
                 Dashboard
-              </Link>
+              </NavLink>
             )}
           </div>
-
+<Tooltip id="my-tooltip" />
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <>
                 {user?.photoURL ? (
                   <img
+                  data-tooltip-id="my-tooltip"
+              data-tooltip-content={user.displayName}
                     src={user.photoURL}
                     alt="User"
                     className="w-8 h-8 rounded-full"
                   />
                 ) : (
-                  <FaUser className="w-6 h-6 text-gray-500" />
+                  <FaUser  className="w-6 h-6 text-gray-500" />
                 )}
                 <button
                   onClick={handleLogout}
