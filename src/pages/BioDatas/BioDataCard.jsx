@@ -8,6 +8,9 @@ import {
 } from "react-icons/fa";
 
 const BioDataCard = ({ biodata }) => {
+  const handleViewProfile=()=>{
+
+  }
   return (
     <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 p-6 flex flex-col items-center text-center border border-gray-100 hover:border-blue-300 group">
       {/* Glowing image ring */}
@@ -55,12 +58,16 @@ const BioDataCard = ({ biodata }) => {
       </ul>
 
       {/* View Profile Button */}
-      <Link
+      
+      <Link onClick={handleViewProfile}
         to={`/biodatas/${biodata._id}`}
-        className="mt-6 bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-5 py-2 rounded-full font-medium text-sm shadow hover:from-indigo-600 hover:to-purple-600 transition duration-300"
+        className="mt-6  bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-5 py-2 rounded-full font-medium text-sm shadow hover:from-indigo-600 hover:to-purple-600 transition duration-300"
       >
-        View Profile
+        
+          View Profile
+       
       </Link>
+       
     </div>
   );
 };
