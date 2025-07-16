@@ -9,6 +9,7 @@ import PrivateRoute from "../provider/PrivateRoute";
 import EditBiodataForm from "../pages/DashBoard/EditBiodataForm";
 import ViewBioData from "../pages/DashBoard/ViewBioData";
 import AllBioData from "../pages/BioDatas/AllBioData";
+import BioDetails from "../pages/BioDatas/BioDetails";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,13 @@ const router = createBrowserRouter([
         element:<PrivateRoute>
           <AllBioData></AllBioData>
         </PrivateRoute>
+      },
+      {
+        path:'/biodatas/:id',
+        element:<PrivateRoute>
+          <BioDetails></BioDetails>
+        </PrivateRoute>
+
       },
       {
         path: "/login",

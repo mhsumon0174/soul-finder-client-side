@@ -24,6 +24,9 @@ export default function EditBiodataForm() {
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
+     if (data.age) {
+    data.age = parseInt(data.age); 
+  }
     try {
       const response = await axios.patch("http://localhost:3000/edit-bio-data", data);
       console.log("Server response:", response.data);

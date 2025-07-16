@@ -1,8 +1,10 @@
-import React from "react"
+import React, { use } from "react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router"
+import { AuthContext } from "../../provider/AuthContext"
 
 export default function Banner() {
+  const {user}=use(AuthContext)
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center text-white overflow-hidden">
       {/* Background Image with Blur */}

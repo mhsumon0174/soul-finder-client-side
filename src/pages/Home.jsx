@@ -1,8 +1,10 @@
-import React from "react"
+import React, { use } from "react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router"
+import { AuthContext } from "../provider/AuthContext"
 
 export default function Banner() {
+  const {user}=use(AuthContext)
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden text-white">
       {/* Background Image with Blur */}
@@ -33,7 +35,8 @@ export default function Banner() {
             variant="outline"
             className="border-white bg-green-500 text-white "
           >
-            <Link to="/register">Join Soulfinder</Link>
+           {user? <Link to="/contact-us">Contact Us</Link>:
+            <Link to="/register">Join Soulfinder</Link>}
           </Button>
         </div>
       </div>
