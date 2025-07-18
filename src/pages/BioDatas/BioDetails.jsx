@@ -2,38 +2,71 @@ import axios from "axios";
 import React, { use, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../../provider/AuthContext";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const BioDetails = () => {
     const {user}=use(AuthContext)
   const { id } = useParams();
   const [biodata, setBiodata] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+const axiosSecure=useAxiosSecure()
+ useEffect(() => {
+  if (!user?.email) return;
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/all-bio/${id}`)
-      .then((res) => setBiodata(res.data))
-      .catch((err) => console.log(err));
-  }, [id]);
+  axiosSecure
+    .get(`/all-bio/${id}?email=${user.email}`)
+    .then((res) => 
+      
+      
+      {
+        setIsFavorite(res.data?.isFavorite || false);
+        
+        setBiodata(res.data)})
+    .catch((err) => console.log(err));
+}, [id, user?.email]);
+
 
   if (!biodata) return <div>Loading...</div>;
 
-  const toggleFavorite = () => {
+ console.log(biodata._id);
+ 
+
+const toggleFavorite = () => {
+  if (isFavorite) {
     
-  setIsFavorite(!isFavorite);
+    axiosSecure
+      .delete(`/favorite-bios/${biodata?._id}?email=${user?.email}`)
+      .then(() => {
+        setIsFavorite(false);
+        console.log("Removed from favorites");
+      })
+      .catch((err) => {
+        console.error("Failed to remove favorite", err);
+      });
+  } else {
+    
+    setIsFavorite(true);
 
-  const favoriteData = {
-    setBy: user?.email,   
-    biodata         
-  };
+    const favoriteData = {
+      setBy: user?.email,
+      biodata,
+    };
 
-  axios
-    .post("http://localhost:3000/favorite-bios", favoriteData)
-    .then(() => {
-      console.log("Added to favorites");
-    })
-    .catch((err) => console.error("Favorite failed", err));
+    axiosSecure
+      .post("/favorite-bios", favoriteData)
+      .then(() => {
+        console.log("Added to favorites");
+      })
+      .catch((err) => {
+        console.error("Failed to add favorite", err);
+        setIsFavorite(false); 
+      });
+  }
 };
+
+  
+
+  
 
  
 
@@ -42,8 +75,8 @@ const BioDetails = () => {
       <div className="bg-white rounded-2xl shadow-2xl text-gray-800 flex flex-col md:flex-row overflow-hidden">
         <div className="md:w-1/3 bg-gradient-to-b from-purple-800 to-pink-300 flex items-center justify-center p-8">
           <img
-            src={biodata.profileImage}
-            alt={biodata.name}
+            src={biodata?.profileImage}
+            alt={biodata?.name}
             className="rounded-full border-8 border-white w-48 h-48 object-cover shadow-lg"
           />
         </div>
@@ -51,16 +84,16 @@ const BioDetails = () => {
         <div className="md:w-2/3 p-10 space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-extrabold tracking-wide mb-2">{biodata.name}</h1>
+              <h1 className="text-4xl font-extrabold tracking-wide mb-2">{biodata?.name}</h1>
               <span className="inline-block px-4 py-1 bg-pink-500 text-white rounded-full uppercase text-sm tracking-wide font-semibold">
-                {biodata.biodataType}
+                {biodata?.biodataType}
               </span>
             </div>
 
 
             <button
               onClick={toggleFavorite}
-              className={`p-3 rounded-full transition-colors duration-300 ${
+              className={` cursor-pointer p-3 rounded-full transition-colors duration-300 ${
                 isFavorite ? "bg-red-600 text-white" : "bg-gray-200 text-gray-700"
               } hover:bg-red-600 hover:text-white`}
               aria-label="Toggle Favorite"
@@ -88,58 +121,58 @@ const BioDetails = () => {
             <div className="space-y-2">
               <p>
                 <span className="font-semibold text-gray-900">Date of Birth: </span>
-                {biodata.dob}
+                {biodata?.dob}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Age: </span>
-                {biodata.age} years
+                {biodata?.age} years
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Height: </span>
-                {biodata.height} cm
+                {biodata?.height} cm
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Weight: </span>
-                {biodata.weight} kg
+                {biodata?.weight} kg
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Occupation: </span>
-                {biodata.occupation}
+                {biodata?.occupation}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Race: </span>
-                {biodata.race}
+                {biodata?.race}
               </p>
             </div>
 
             <div className="space-y-2">
               <p>
                 <span className="font-semibold text-gray-900">Father's Name: </span>
-                {biodata.fatherName}
+                {biodata?.fatherName}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Mother's Name: </span>
-                {biodata.motherName}
+                {biodata?.motherName}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Permanent Division: </span>
-                {biodata.permanentDivision}
+                {biodata?.permanentDivision}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Present Division: </span>
-                {biodata.presentDivision}
+                {biodata?.presentDivision}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Expected Partner Age: </span>
-                {biodata.expectedPartnerAge} years
+                {biodata?.expectedPartnerAge} years
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Expected Partner Height: </span>
-                {biodata.expectedPartnerHeight} cm
+                {biodata?.expectedPartnerHeight} cm
               </p>
               <p>
                 <span className="font-semibold text-gray-900">Expected Partner Weight: </span>
-                {biodata.expectedPartnerWeight} kg
+                {biodata?.expectedPartnerWeight} kg
               </p>
             </div>
           </div>
@@ -148,13 +181,13 @@ const BioDetails = () => {
             <p>
               <span className="font-semibold text-gray-900">Email: </span>
               <a  className="text-pink-900 hover:underline">
-                {biodata.email}
+                {biodata?.email}
               </a>
             </p>
             <p>
               <span className="font-semibold text-gray-900">Mobile: </span>
               <a  className="text-pink-900 hover:underline">
-                {biodata.mobile}
+                {biodata?.mobile}
               </a>
             </p>
           </div>

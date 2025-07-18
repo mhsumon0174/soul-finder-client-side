@@ -5,14 +5,17 @@ import { Button } from "@/components/ui/button";
 import Loading from "../../components/Loading";
 import { use } from "react";
 import { AuthContext } from "../../provider/AuthContext";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 export default function ViewBioData() {
   const { user } = use(AuthContext);
-
+const axiosSecure=useAxiosSecure()
   const { data: biodata, isLoading } = useQuery({
     queryKey: ["biodata", user?.email],
     queryFn: async () => {
-      const { data } = await axios.get(`http://localhost:3000/my-bio/${user.email}`);
+      const { data } = await axiosSecure.get(`/my-bio/${user.email}`
+        
+      );
       return data;
     },
     enabled: !!user?.email,

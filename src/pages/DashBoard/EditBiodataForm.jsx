@@ -4,19 +4,19 @@ import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../provider/AuthContext";
 import { Button } from "@/components/ui/button";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 export default function EditBiodataForm() {
   const { user } = use(AuthContext);
-  
+  const axiosSecure=useAxiosSecure()
   const { data: biodata } = useQuery({
     queryKey: ['biodata', user?.email],
     queryFn: async () => {
-      const { data } = await axios(
-        `http://localhost:3000/my-bio/${user?.email}`
+      const { data } = await axiosSecure(`/my-bio/${user?.email}`
       );
       return data;
     },
-    enabled: !!user?.email,  // only run when user.email exists
+    enabled: !!user?.email,  
   });
 
   const handleSubmit = async (e) => {
@@ -28,7 +28,7 @@ export default function EditBiodataForm() {
     data.age = parseInt(data.age); 
   }
     try {
-      const response = await axios.patch("http://localhost:3000/edit-bio-data", data);
+      const response = await axiosSecure.patch(`/edit-bio-data`, data);
       console.log("Server response:", response.data);
       if(response.data){
          return Swal.fire({

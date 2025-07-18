@@ -10,6 +10,8 @@ import EditBiodataForm from "../pages/DashBoard/EditBiodataForm";
 import ViewBioData from "../pages/DashBoard/ViewBioData";
 import AllBioData from "../pages/BioDatas/AllBioData";
 import BioDetails from "../pages/BioDatas/BioDetails";
+import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -22,9 +24,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/biodatas",
-        element:<PrivateRoute>
+        element:
           <AllBioData></AllBioData>
-        </PrivateRoute>
+        
       },
       {
         path:'/biodatas/:id',
@@ -41,6 +43,15 @@ const router = createBrowserRouter([
         path: "/register",
         Component: Register,
       },
+      {
+        path:'/about-us',
+        Component:AboutUs
+      },
+      {
+        path:'/contact-us',
+        Component:ContactUs
+      },
+
     ],
   },
   {
