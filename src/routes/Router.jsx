@@ -12,6 +12,7 @@ import AllBioData from "../pages/BioDatas/AllBioData";
 import BioDetails from "../pages/BioDatas/BioDetails";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
+import CheckOut from "../pages/CheckOut/CheckOut";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path:'/contact-us',
         Component:ContactUs
+      },
+      {
+        path:'/checkout/:id',
+        Component:CheckOut
       },
 
     ],

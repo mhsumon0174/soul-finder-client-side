@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = use(AuthContext);
-console.log(user);
+
 
   const handleLogout = () => {
     logOut()

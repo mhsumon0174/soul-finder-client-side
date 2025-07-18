@@ -107,7 +107,7 @@ const axiosSecure=useAxiosSecure()
 
         <button
           onClick={applyFilters}
-          className="w-full bg-blue-700 text-white py-2 rounded mt-2"
+          className="w-full cursor-pointer bg-blue-700 text-white py-2 rounded mt-2"
         >
           Apply Filter
         </button>

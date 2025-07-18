@@ -3,6 +3,8 @@ import React, { use, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../../provider/AuthContext";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useRole from "../../hooks/useRole";
+import Swal from "sweetalert2";
 
 const BioDetails = () => {
   const [similarBiodatas, setSimilarBiodatas] = useState([]);
@@ -11,16 +13,22 @@ const BioDetails = () => {
   const [biodata, setBiodata] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const axiosSecure = useAxiosSecure();
+  const [role,isRoleLoading]=useRole()
+  
+  
+  
   useEffect(() => {
     if (!user?.email) return;
 
     axiosSecure
-      .get(`/all-bio/${id}?email=${user.email}`)
+      .get(`/get-bio/${id}?email=${user.email}`)
       .then((res) => {
         
-console.log(res.data);
+
 
         setBiodata(res.data);
+        
+        
        setIsFavorite(Boolean(res.data?.isFavorite));
         axiosSecure
           .get(
@@ -49,16 +57,22 @@ console.log(res.data);
           console.error("Failed to remove favorite", err);
         });
     } else {
-      setIsFavorite(true);
-
-      const favoriteData = {
-        setBy: user?.email,
-        biodata,
-      };
+      
+if(biodata.email===user?.email){
+ return Swal.fire({
+           icon: "error",
+           title: "Failed",
+           text: "You Can't Add Favorite Your Own Bio-Data",
+           draggable: true,
+           timer: 3400,
+         });
+}
+      const favoriteData =biodata;
 
       axiosSecure
-        .post("/favorite-bios", favoriteData)
+        .post(`/favorite-bios/${user?.email}`, favoriteData)
         .then(() => {
+          setIsFavorite(true);
           console.log("Added to favorites");
         })
         .catch((err) => {
@@ -146,16 +160,30 @@ console.log(res.data);
           </div>
 
           {/* Contact Info */}
-          <div className="pt-6 border-t border-gray-200 text-lg text-gray-700 text-center">
-            <p>
-              <span className="font-semibold text-gray-900">Email: </span>
-              <a className="text-pink-900 hover:underline">{biodata?.email}</a>
-            </p>
-            <p>
-              <span className="font-semibold text-gray-900">Mobile: </span>
-              <a className="text-pink-900 hover:underline">{biodata?.mobile}</a>
-            </p>
-          </div>
+          <div className="pt-6 border-t border-gray-200 text-lg text-gray-700 text-center mt-6">
+  {role === "premium" ? 
+    <>
+    <p className="mb-4 font-bold bg-amber-200 p-1 rounded-2xl">Contact Information</p>
+      <p>
+        <span className="font-semibold text-gray-900">Email: </span>
+        <a className="text-pink-900 hover:underline">{biodata?.email}</a>
+      </p>
+      <p>
+        <span className="font-semibold text-gray-900">Mobile: </span>
+        <a className="text-pink-900 hover:underline">{biodata?.mobile}</a>
+      </p>
+    </>
+   : 
+    <button onClick={() => (window.location.href = `/checkout/${biodata?._id}`)}
+       
+      className="cursor-pointer mt-4 bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-4 rounded-md transition duration-300"
+    
+    >
+      Request Contact Information
+    </button>
+   }
+</div>
+
         </div>
       </div>
     </div>
@@ -188,7 +216,7 @@ console.log(res.data);
           </p>
           <button
             onClick={() => (window.location.href = `/biodatas/${bio._id}`)}
-            className="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-4 rounded-md transition duration-300"
+            className="mt-4 cursor-pointer bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-4 rounded-md transition duration-300"
           >
             View Profile
           </button>
