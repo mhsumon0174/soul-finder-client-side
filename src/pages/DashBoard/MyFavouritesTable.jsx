@@ -7,8 +7,6 @@ import { useContext } from "react";
 const MyFavouritesTable = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
-  const queryClient = useQueryClient();
-
   const { data: favourites = [], isLoading, isError,refetch } = useQuery({
     queryKey: ["favorite-bio", user?.email],
     enabled: !!user?.email,
@@ -68,7 +66,7 @@ const MyFavouritesTable = () => {
         My Favourites Biodata
       </h2>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-scroll">
         <table className="min-w-full border border-gray-200 border-collapse">
           <thead className="bg-indigo-100 sticky top-0">
             <tr>

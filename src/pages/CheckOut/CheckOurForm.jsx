@@ -83,7 +83,8 @@ getClientSecret()
     biodataId: biodata?.BiodataId,
     email: user?.email,
     nowStatus:"Pending",
-    biodata
+    biodata,
+    fee
   });
 
   console.log('Contact request saved:', data);

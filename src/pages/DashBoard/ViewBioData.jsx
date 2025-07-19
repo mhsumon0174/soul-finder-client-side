@@ -6,6 +6,7 @@ import Loading from "../../components/Loading";
 import { use } from "react";
 import { AuthContext } from "../../provider/AuthContext";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 export default function ViewBioData() {
   const { user } = use(AuthContext);
@@ -20,9 +21,29 @@ const axiosSecure=useAxiosSecure()
     },
     enabled: !!user?.email,
   });
-  const handleBtn=()=>{
-    
-  }
+  const handleBtn = (email) => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: `Do you want to send a premium request ?`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, send it!',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      axiosSecure.post(`/premium-request/${email}`)
+        .then(res => {
+          console.log(res.data);
+          Swal.fire('Sent!', 'Your premium request has been sent.', 'success');
+        })
+        .catch(err => {
+          const message=err?.response?.data?.message
+          Swal.fire('Error!',message,'error' );
+        });
+    }
+  });
+};
 
   if (isLoading) return <Loading />;
 
@@ -61,11 +82,12 @@ const axiosSecure=useAxiosSecure()
         <div><strong>Mobile:</strong> {biodata?.mobile}</div>
       </div>
 
-      <div className="mt-8 text-center">
-        <Button onCLick={handleBtn} className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 mx-auto">
+      <div className="mt-8 text-center ">
+        <button onClick={()=>{handleBtn(biodata?.email)}} className="bg-gradient-to-r cursor-pointer from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 mx-auto">
           <FaStar className="text-yellow-300" />
           Make Biodata Premium
-        </Button>
+        </button>
+        
       </div>
     </div>
   );

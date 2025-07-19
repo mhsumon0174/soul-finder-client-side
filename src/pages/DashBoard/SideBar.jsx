@@ -12,9 +12,12 @@ import { use } from "react";
 import { AuthContext } from "../../provider/AuthContext";
 import Swal from "sweetalert2";
 import CustomerMenu from "./CustomerMenu";
-
+import useRole from '../../hooks/useRole'
+import AdminMenu from "./Admin/AdminMenu";
 export default function SideBar() {
   const { logOut } = use(AuthContext);
+const [role,isRoleLoading]=useRole()
+
 
   const handleLogout = () => {
     logOut()
@@ -37,7 +40,8 @@ export default function SideBar() {
       {/* Top Nav Items */}
       <div>
         <h2 className="text-2xl font-bold text-gray-800 mb-8 text-right md:text-left ">Dashboard</h2>
-        <CustomerMenu></CustomerMenu>
+        { role==='normal' && <CustomerMenu/>}
+      { role==='admin' && <AdminMenu></AdminMenu>}
       </div>
 
       {/* Logout Button at Bottom */}

@@ -16,6 +16,8 @@ import CheckOut from "../pages/CheckOut/CheckOut";
 import MyContactRequest from "../pages/DashBoard/MyContactRequest";
 import MyFavouritesTable from "../pages/DashBoard/MyFavouritesTable";
 import GotMarried from "../pages/DashBoard/GotMarried";
+import ManageUsers from "../pages/DashBoard/Admin/ManageUsers";
+import ApprovedPremium from "../pages/DashBoard/Admin/ApprovedPremium";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +100,18 @@ const router = createBrowserRouter([
          <GotMarried></GotMarried>
         </PrivateRoute>
       },
+      {
+        path:'/dashboard/manage-users',
+        element:<PrivateRoute>
+          <ManageUsers></ManageUsers>
+        </PrivateRoute>
+      },
+      {
+        path:'/dashboard/approved-premium',
+        element:<PrivateRoute>
+          <ApprovedPremium/>
+        </PrivateRoute>
+      }
     ],
   },
   {

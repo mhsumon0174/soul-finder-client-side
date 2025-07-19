@@ -4,21 +4,31 @@ import SideBar from "../pages/DashBoard/SideBar";
 import { FaBars } from "react-icons/fa";
 import DashboardHome from "../pages/DashBoard/DashBoardHome";
 
+import useRole from "../hooks/useRole";
+import AdminDashboardHome from "../pages/DashBoard/Admin/AdminDashboardHome";
+
 export default function DashboardLayout() {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
+  const [role, isRoleLoading] = useRole();
 
-  
   useEffect(() => {
     setShowSidebar(false);
   }, [location.pathname]);
 
-  
   const isDashboardRoot = location.pathname === "/dashboard";
+
+  // Optionally, you can handle loading state here
+  if (isRoleLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen relative">
-      
       <button
         className="md:hidden fixed top-4 left-4 z-50 bg-yellow-200 p-2 shadow rounded-md"
         onClick={() => setShowSidebar(!showSidebar)}
@@ -26,7 +36,6 @@ export default function DashboardLayout() {
         <FaBars size={20} />
       </button>
 
-     
       <div
         className={`fixed top-0 left-0 h-full z-40 bg-white transition-transform duration-300 ease-in-out w-64
           ${showSidebar ? "translate-x-0" : "-translate-x-full"} 
@@ -35,7 +44,6 @@ export default function DashboardLayout() {
         <SideBar />
       </div>
 
-     
       {showSidebar && (
         <div
           onClick={() => setShowSidebar(false)}
@@ -43,9 +51,16 @@ export default function DashboardLayout() {
         ></div>
       )}
 
-     
       <main className="flex-1 ml-0 md:ml-4 p-4 bg-white min-h-screen">
-        {isDashboardRoot ? <DashboardHome /> : <Outlet />}
+        {isDashboardRoot ? (
+          role === "admin" ? (
+            <AdminDashboardHome />
+          ) : (
+            <DashboardHome />
+          )
+        ) : (
+          <Outlet />
+        )}
       </main>
     </div>
   );
