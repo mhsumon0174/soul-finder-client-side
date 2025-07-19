@@ -152,7 +152,7 @@ const GotMarried = () => {
       type="submit"
       className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-transform hover:-translate-y-0.5"
     >
-      📤 Submit Story
+       Submit Story
     </button>
   </form>
 </div>
