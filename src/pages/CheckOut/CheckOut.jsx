@@ -26,6 +26,7 @@ const CheckOut = () => {
     },
   });
 
+
   if (isLoading) return <Loading />;
 
   return (

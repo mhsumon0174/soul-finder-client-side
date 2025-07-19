@@ -11,7 +11,8 @@ export default function Footer() {
       <div className="max-w-8xl mx-auto px-6 py-16 grid grid-cols-1 text-center md:grid-cols-4 gap-10">
         {/* About Section */}
         <div className="flex flex-col items-center md:items-start">
-          <div className="flex items-center space-x-3 mb-4">
+          <Link to='/'>
+          <div  className="flex items-center space-x-3 mb-4">
             <img
               src="https://i.ibb.co/wZT7dn55/33523-modified.png"
               alt="Soulfinder Logo"
@@ -19,6 +20,7 @@ export default function Footer() {
             />
             <h2 className="text-3xl font-bold text-foreground">Soulfinder</h2>
           </div>
+          </Link>
           <p className="leading-relaxed text-center md:text-left max-w-sm">
             Connect with your better half. Soulfinder helps you find meaningful relationships with ease and trust.
           </p>

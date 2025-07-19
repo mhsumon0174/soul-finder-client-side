@@ -13,6 +13,9 @@ import BioDetails from "../pages/BioDatas/BioDetails";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
 import CheckOut from "../pages/CheckOut/CheckOut";
+import MyContactRequest from "../pages/DashBoard/MyContactRequest";
+import MyFavouritesTable from "../pages/DashBoard/MyFavouritesTable";
+import GotMarried from "../pages/DashBoard/GotMarried";
 
 const router = createBrowserRouter([
   {
@@ -25,16 +28,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/biodatas",
-        element:
-          <AllBioData></AllBioData>
-        
+        element: <AllBioData></AllBioData>,
       },
       {
-        path:'/biodatas/:id',
-        element:<PrivateRoute>
-          <BioDetails></BioDetails>
-        </PrivateRoute>
-
+        path: "/biodatas/:id",
+        element: (
+          <PrivateRoute>
+            <BioDetails></BioDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -45,18 +47,17 @@ const router = createBrowserRouter([
         Component: Register,
       },
       {
-        path:'/about-us',
-        Component:AboutUs
+        path: "/about-us",
+        Component: AboutUs,
       },
       {
-        path:'/contact-us',
-        Component:ContactUs
+        path: "/contact-us",
+        Component: ContactUs,
       },
       {
-        path:'/checkout/:id',
-        Component:CheckOut
+        path: "/checkout/:id",
+        element:<PrivateRoute><CheckOut></CheckOut></PrivateRoute>
       },
-
     ],
   },
   {
@@ -69,11 +70,33 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/edit-bio-data",
-        Component: EditBiodataForm,
+        element:<PrivateRoute>
+          <EditBiodataForm></EditBiodataForm>
+        </PrivateRoute>
       },
       {
         path: "/dashboard/view-bio-data",
-        Component: ViewBioData,
+        element:<PrivateRoute>
+         <ViewBioData></ViewBioData>
+        </PrivateRoute>
+      },
+      {
+        path: "/dashboard/my-contact-request",
+       element:<PrivateRoute>
+          <MyContactRequest></MyContactRequest>
+        </PrivateRoute>
+      },
+      {
+        path: "/dashboard/my-favorites",
+        element:<PrivateRoute>
+         <MyFavouritesTable></MyFavouritesTable>
+        </PrivateRoute>
+      },
+      {
+        path: "/dashboard/got-married",
+        element:<PrivateRoute>
+         <GotMarried></GotMarried>
+        </PrivateRoute>
       },
     ],
   },

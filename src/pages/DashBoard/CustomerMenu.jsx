@@ -4,8 +4,9 @@ import {
   FaUserEdit,
   FaAddressCard,
   FaHeart,
-  FaEnvelope,
+  FaEnvelope
 } from "react-icons/fa";
+import { GiLovers } from "react-icons/gi";
 
 export default function CustomerMenu() {
   return (
@@ -25,17 +26,23 @@ export default function CustomerMenu() {
       </NavLink>
 
       <NavLink
-        to="/dashboard/contact-requests"
+        to="/dashboard/my-contact-request"
         className="flex items-center gap-3 text-gray-700 hover:text-blue-600 font-medium transition"
       >
         <FaEnvelope /> My Contact Request
       </NavLink>
 
       <NavLink
-        to="/dashboard/favourites"
+        to="/dashboard/my-favorites"
         className="flex items-center gap-3 text-gray-700 hover:text-blue-600 font-medium transition"
       >
         <FaHeart /> Favourites Biodata
+      </NavLink>
+      <NavLink
+        to="/dashboard/got-married"
+        className="flex items-center gap-3 text-gray-700 hover:text-blue-600 font-medium transition"
+      >
+        <GiLovers/> Got Married?
       </NavLink>
     </nav>
   );

@@ -2,11 +2,15 @@ import React, { use } from "react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router"
 import { AuthContext } from "../provider/AuthContext"
+import PremiumSection from "../components/HomeComponents/PremiumSection"
+import HowItWorks from "../components/HomeComponents/HowItWorks"
+import SuccessCounter from "../components/HomeComponents/SuccessCounter"
+import SuccessStories from "../components/HomeComponents/SuccessStories"
 
 export default function Banner() {
   const {user}=use(AuthContext)
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden text-white">
+    <><section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden text-white">
       {/* Background Image with Blur */}
       <img
         src="https://i.ibb.co/fzywjKS9/banner.png"
@@ -39,7 +43,25 @@ export default function Banner() {
             <Link to="/register">Join Soulfinder</Link>}
           </Button>
         </div>
+        
       </div>
+      
     </section>
+  <div className="my-20 md:my-40">
+    <h2 className="text-3xl md:text-4xl font-extrabold text-center  tracking-wide drop-shadow-sm mb-8">
+   Premium Members 
+</h2>
+      <PremiumSection></PremiumSection>
+  </div>
+  <div className="my-20 md:my-40">
+    <HowItWorks></HowItWorks>
+  </div>
+  <div className="my-20 md:my-40">
+    <SuccessCounter></SuccessCounter>
+  </div>
+  <div className="my-20 md:my-40">
+    <SuccessStories></SuccessStories>
+  </div>
+    </>
   )
 }
