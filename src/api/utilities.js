@@ -1,7 +1,7 @@
 import axios from 'axios'
 export const saveUserInDB = async user => {
   const { data } = await axios.post(
-    'http://localhost:3000/add-users',
+    'https://assignment-12-server-two-bice.vercel.app/add-users',
     user
   )
 

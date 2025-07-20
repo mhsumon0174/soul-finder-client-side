@@ -1,12 +1,63 @@
-# React + Vite
+# SoulFinder - Matrimony Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌐 **Live Site**: [https://assignment-12-cb010.web.app/](https://assignment-12-cb010.web.app/)
 
-Currently, two official plugins are available:
+🔐 **Admin Login**
+- **Email**: mh.sumon@gmail.com
+- **Password**: Mh1234
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📌 Website Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. 🔐 **Authentication System**
+   - Login/Register via Email/Password and Google
+   - JSON Web Token (JWT) based secure route protection
+
+2. 📄 **Dynamic Biodata Management**
+   - Create, view, and edit detailed personal biodata
+   - Users can view others’ biodatas with filtered access
+
+3. 🌟 **Premium Biodata Request**
+   - Users can request to make their biodata premium
+   - Admin approves or rejects premium requests
+
+4. 📞 **Contact Information Request**
+   - Authenticated users can request contact info of others via Stripe payment
+   - Admin approves the request before contact info is shared
+
+5. 🧑‍💻 **Admin Dashboard**
+   - Full control over biodatas, users, requests, and analytics
+   - Pie chart visualizations for analytics
+
+6. 🧾 **Filtering & Pagination**
+   - Filter biodatas by age, gender, division, and more
+   - Smooth pagination for efficient browsing
+
+7. 💍 **Got Married Success Stories**
+   - Users can submit their successful matches
+   - Admin approves stories to be shown on the success page
+
+8. ❤️ **Favorite System**
+   - Logged-in users can mark biodatas as favorite
+   - Favorites are displayed on a separate page
+
+9. 🌙 **Dark/Light Theme Support**
+   - User can toggle between dark and light themes
+
+10. 📱 **Fully Responsive**
+    - Works beautifully on mobile, tablet, and desktop devices
+
+---
+
+## ⚙️ Tech Stack
+
+- **Frontend**: React, Tailwind CSS, ShadCN UI, TanStack Query, React Router
+- **Backend**: Node.js, Express.js, MongoDB
+- **Authentication**: Firebase Auth + JWT
+- **Payment**: Stripe
+- **Charts**: Recharts
+
+---
+
+> Built with 💖 for Matrimony Matching.
