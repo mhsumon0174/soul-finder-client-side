@@ -9,10 +9,10 @@ const ManageUsers = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
 
-  const [search, setSearch] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [submittedSearch, setSubmittedSearch] = useState(""); // actual search trigger
 
-  // Premium requests - no change needed here
+
   const { data: premium = [], refetch: refetchPremium } = useQuery({
     queryKey: ["premium-request", user?.email],
     enabled: !!user?.email,
@@ -22,26 +22,33 @@ const ManageUsers = () => {
     },
   });
 
-  // Users query - depends on searchQuery
+
   const {
     data: users = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["manage-user", user?.email, searchQuery],
+    queryKey: ["manage-user", user?.email, submittedSearch],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get("/all-users", {
-        params: { search: searchQuery },
+      const res = await axiosSecure.get("/find-all-users", {
+        params: { search: submittedSearch },
       });
       return res.data;
     },
   });
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSubmittedSearch(searchText.trim());
+  };
+
   const updateAdminRole = async (email, newRole) => {
     try {
-      await axiosSecure.patch(`/update-role/${email}`);
-      refetch(); // refetch user list after update
+      await axiosSecure.patch(`/update-role/${email}`, {
+        role: newRole,
+      });
+      refetch();
       Swal.fire({
         icon: "success",
         title: "Success",
@@ -57,7 +64,8 @@ const ManageUsers = () => {
   const updatePremiumRequest = async (email) => {
     try {
       await axiosSecure.patch(`/premium-role-update/${email}`);
-      refetchPremium(); // refetch premium requests after update
+      refetchPremium();
+      refetch();
       Swal.fire({
         icon: "success",
         title: "Upgraded!",
@@ -76,25 +84,22 @@ const ManageUsers = () => {
       <h2 className="text-2xl font-semibold mb-4">Manage Users</h2>
 
       {/* Search box */}
-      <div className="mb-4 flex gap-2">
-        <input
-          type="text"
-          placeholder="Search by username or email"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              setSearchQuery(search.trim());
-            }
-          }}
-          className="flex-1 border border-gray-300 rounded px-3 py-2"
-        />
-        <button
-          onClick={() => setSearchQuery(search.trim())}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-        >
-          Search
-        </button>
+      <div className="mb-4">
+        <form onSubmit={handleSearch} className="flex gap-2">
+          <input
+            type="text"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder="Search by username or email"
+            className="w-full border border-gray-300 rounded px-3 py-2"
+          />
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+          >
+            Search
+          </button>
+        </form>
       </div>
 
       <table className="w-full border-collapse border border-gray-300">
@@ -133,7 +138,9 @@ const ManageUsers = () => {
                     )}
                   </td>
                   <td className="border border-gray-300 px-4 py-2 text-center">
-                    {hasRequestedPremium ? (
+                    {u.role === "premium" ? (
+                      <span className="text-purple-600 font-semibold">Premium</span>
+                    ) : hasRequestedPremium ? (
                       <button
                         onClick={() => updatePremiumRequest(u.email)}
                         className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded"

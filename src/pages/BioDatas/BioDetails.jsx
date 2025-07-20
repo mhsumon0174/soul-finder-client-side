@@ -6,16 +6,17 @@ import useRole from "../../hooks/useRole";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading";
+import { use } from "react";
 
 const BioDetails = () => {
-  const { user } = React.useContext(AuthContext);
+  const { user } = use(AuthContext);
   const { id } = useParams();
   const [biodata, setBiodata] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const axiosSecure = useAxiosSecure();
   const [role, isRoleLoading] = useRole();
 
-  // Fetch main biodata with react-query
+  
   const {
     data: biodataData,
     isLoading
@@ -29,15 +30,16 @@ const BioDetails = () => {
     },
     enabled: !!user?.email && !!id,
   });
+  
 
-  // Update local biodata and favorite state on fetch
+  
   useEffect(() => {
     if (!biodataData) return;
     setBiodata(biodataData);
     setIsFavorite(Boolean(biodataData?.isFavorite));
   }, [biodataData]);
 
-  // Fetch similar biodatas using react-query directly (no local state)
+  
   const {
     data: similarBiodatas = [], // default to empty array if no data
   } = useQuery({

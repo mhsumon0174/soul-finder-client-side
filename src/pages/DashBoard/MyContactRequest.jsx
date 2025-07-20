@@ -13,11 +13,12 @@ const { user } = use(AuthContext);
   const axiosSecure = useAxiosSecure();
 
 
+
  const { data = [], isLoading, refetch } = useQuery({
   queryKey: ["contact-req", user?.email],
   enabled: !!user?.email,
   queryFn: async () => {
-    const res = await axiosSecure.get(`/contact-req/${user.email}`);
+    const res = await axiosSecure.get(`/get-my-contact-req/${user?.email}`);
     return res?.data?.map(item => ({
       ...item.biodata,
 
@@ -30,8 +31,9 @@ const { user } = use(AuthContext);
     }));
   },
 });
+console.log(data);
 
-console.log(typeof data);
+
 
   const handleDelete = (email) => {
   Swal.fire({
@@ -48,7 +50,7 @@ console.log(typeof data);
         await axiosSecure.delete(`/contact-req/${email}`);
         refetch()
         Swal.fire("Deleted!", "Your request has been deleted.", "success");
-        refetch(); // refetch data after delete
+        
       } catch (error) {
         Swal.fire("Error!", "Failed to delete. Try again later.", "error");
       }

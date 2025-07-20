@@ -1,32 +1,38 @@
 import React from "react";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Loading from "../../../components/Loading";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-const ApprovedPremium = () => {
+const ApprovedContactRequest = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: premiumRequests = [], isLoading, refetch } = useQuery({
-    queryKey: ["premium-request"],
+  const {
+    data: contactRequests = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["contact-request"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/premium-request");
+      const res = await axiosSecure.get("/contact-req");
       return res.data;
     },
   });
+console.log(contactRequests);
 
-  const handleApprovePremium = async (email) => {
+  const handleApproveContact = async (id) => {
     try {
-      await axiosSecure.patch(`/premium-role-update/${email}`);
+      await axiosSecure.patch(`/approve-contact-request/${id}`);
       refetch()
       Swal.fire({
         icon: "success",
-        title: "Upgraded!",
-        text: `${email} is now a Premium User.`,
+        title: "Approved!",
+        text: `Contact request approved.`,
       });
-      refetch();
+      
     } catch (error) {
-      Swal.fire("Error", "Failed to upgrade to premium", "error");
+      Swal.fire("Error", "Failed to approve contact request", "error");
     }
   };
 
@@ -34,10 +40,10 @@ const ApprovedPremium = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white rounded shadow mt-10">
-      <h2 className="text-2xl font-semibold mb-6">Premium Approval Requests</h2>
+      <h2 className="text-2xl font-semibold mb-6">Approved Contact Requests</h2>
 
-      {premiumRequests.length === 0 ? (
-        <p className="text-center text-gray-500">No premium requests pending.</p>
+      {contactRequests.length === 0 ? (
+        <p className="text-center text-gray-500">No contact requests found.</p>
       ) : (
         <table className="w-full border-collapse border border-gray-300">
           <thead>
@@ -49,20 +55,20 @@ const ApprovedPremium = () => {
             </tr>
           </thead>
           <tbody>
-            {premiumRequests.map((request) => (
+            {contactRequests.map((request) => (
               <tr key={request._id} className="hover:bg-gray-50">
-                <td className="border px-4 py-2">{request.name || "N/A"}</td>
-                <td className="border px-4 py-2">{request.email}</td>
-                <td className="border px-4 py-2">{request.BiodataId}</td>
+                <td className="border px-4 py-2">{request?.name || "N/A"}</td>
+                <td className="border px-4 py-2">{request?.email}</td>
+                <td className="border px-4 py-2">{request?.biodataId}</td>
                 <td className="border px-4 py-2 text-center">
-                  {request.status === "approved" || request.type === "premium" ? (
+                  {request?.nowStatus === "Approved" ? (
                     <span className="text-green-600 font-medium">Approved</span>
                   ) : (
                     <button
-                      onClick={() => handleApprovePremium(request.email)}
-                      className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded"
+                      onClick={() => handleApproveContact(request?._id)}
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"
                     >
-                      Make Premium
+                      Approve Contact
                     </button>
                   )}
                 </td>
@@ -75,4 +81,4 @@ const ApprovedPremium = () => {
   );
 };
 
-export default ApprovedPremium;
+export default ApprovedContactRequest;

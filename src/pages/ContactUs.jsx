@@ -93,7 +93,7 @@ export default function ContactUs() {
               <FaEnvelope className="text-indigo-600 w-6 h-6 mt-1" />
               <div>
                 <h4 className="text-lg font-medium text-gray-800">Email</h4>
-                <p className="text-gray-600">support@soulfinder.com</p>
+                <p className="text-gray-600">soulfinder@gmail.com</p>
               </div>
             </div>
 

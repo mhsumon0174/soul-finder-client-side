@@ -1,32 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import { FaStar } from "react-icons/fa";
-
-const dummySuccessStories = [
-  {
-    id: 1,
-    image: "https://i.ibb.co/svHsNrb/man1.jpg",
-    marriageDate: "2023-06-15",
-    rating: 5,
-    story:
-      "We met through this platform and it changed our lives forever. The process was smooth and support was fantastic!",
-  },
-  {
-    id: 2,
-    image: "https://i.ibb.co/3NFh09X/woman1.jpg",
-    marriageDate: "2022-11-20",
-    rating: 4,
-    story:
-      "Thanks to this site, we found each other and are happily married. Highly recommended for serious match seekers.",
-  },
-  {
-    id: 3,
-    image: "https://i.ibb.co/YbKxF5x/man2.jpg",
-    marriageDate: "2023-01-10",
-    rating: 5,
-    story:
-      "A wonderful journey that started with a profile and ended in happiness. The communication features helped a lot.",
-  },
-];
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../../components/Loading"; // show while fetching
 
 const formatDate = (dateStr) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -34,47 +10,65 @@ const formatDate = (dateStr) => {
 };
 
 const SuccessStories = () => {
-  
-  const [stories] = useState(
-    dummySuccessStories.sort(
-      (a, b) => new Date(b.marriageDate) - new Date(a.marriageDate)
-    )
-  );
+  const axiosSecure = useAxiosSecure();
+
+  const { data: stories = [], isLoading } = useQuery({
+    queryKey: ["success-stories"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/success-stories");
+      return res.data;
+    },
+  });
+
+const sortedStories = [...stories].sort(
+  (a, b) => new Date(a.submittedAt) - new Date(b.submittedAt)
+);
+
+
+console.log("Stories before sort:", stories);
+console.log("Stories after sort:", sortedStories);
+
+  if (isLoading) return <Loading />;
 
   return (
-    <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16 bg-white rounded-3xl shadow-lg mt-16">
+    <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-16  rounded-3xl  mt-16">
       <h2 className="text-4xl font-extrabold text-center text-indigo-700 mb-12">
         Success Stories
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-        {stories.map(({ id, image, marriageDate, rating, story }) => (
-          <div
-            key={id}
-            className="bg-indigo-50 rounded-xl p-6 shadow-md flex flex-col items-center text-center"
-          >
-            <img
-              src={image}
-              alt="Couple"
-              className="w-32 h-32 rounded-full object-cover border-4 border-indigo-400 mb-6"
-            />
-            <p className="text-indigo-700 font-semibold mb-1">
-              Married on {formatDate(marriageDate)}
-            </p>
+       {sortedStories.map(
+  ({ _id, coupleImageLink, submittedAt, rating, successStory }) => (
+    <div
+      key={_id}
+      className="bg-gradient-to-br from-indigo-100 to-white rounded-xl p-6 shadow-md hover:shadow-xl transform hover:scale-[1.03] transition-all duration-300 flex flex-col items-center text-center"
+    >
+      <img
+        src={coupleImageLink}
+        alt="Couple"
+        className="w-32 h-32 rounded-full object-cover border-4 border-indigo-400 mb-6 shadow-md"
+      />
+      <p className="text-indigo-700 font-semibold mb-1">
+        Married on {formatDate(submittedAt)}
+      </p>
 
-            <div className="flex justify-center mb-4">
-              {[...Array(5)].map((_, i) => (
-                <FaStar
-                  key={i}
-                  className={`text-xl ${
-                    i < rating ? "text-yellow-400" : "text-gray-300"
-                  }`}
-                />
-              ))}
-            </div>
-
-            <p className="text-gray-700 text-sm font-medium italic">{`"${story}"`}</p>
-          </div>
+      <div className="flex justify-center mb-4">
+        {[...Array(5)].map((_, i) => (
+          <FaStar
+            key={i}
+            className={`text-xl ${
+              i < rating ? "text-yellow-400" : "text-gray-300"
+            }`}
+          />
         ))}
+      </div>
+
+      <p className="text-gray-700 text-[15px] font-medium italic leading-relaxed">
+        {`"${successStory}"`}
+      </p>
+    </div>
+  )
+)}
+
       </div>
     </section>
   );

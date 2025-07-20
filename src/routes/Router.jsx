@@ -18,6 +18,8 @@ import MyFavouritesTable from "../pages/DashBoard/MyFavouritesTable";
 import GotMarried from "../pages/DashBoard/GotMarried";
 import ManageUsers from "../pages/DashBoard/Admin/ManageUsers";
 import ApprovedPremium from "../pages/DashBoard/Admin/ApprovedPremium";
+import ApprovedContactRequest from "../pages/DashBoard/Admin/ApprovedContactRequest";
+import AdminSuccessStory from "../pages/DashBoard/Admin/AdminSuccessStory";
 
 const router = createBrowserRouter([
   {
@@ -111,7 +113,20 @@ const router = createBrowserRouter([
         element:<PrivateRoute>
           <ApprovedPremium/>
         </PrivateRoute>
-      }
+      },
+      {
+        path:'/dashboard/approved-contact-request',
+        element:<PrivateRoute>
+          <ApprovedContactRequest/>
+        </PrivateRoute>
+      },
+      {
+        path:'/dashboard/admin-success-story',
+        element:<PrivateRoute>
+         <AdminSuccessStory/>
+        </PrivateRoute>
+      },
+
     ],
   },
   {

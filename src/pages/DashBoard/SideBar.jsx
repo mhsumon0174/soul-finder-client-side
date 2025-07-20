@@ -41,6 +41,7 @@ const [role,isRoleLoading]=useRole()
       <div>
         <h2 className="text-2xl font-bold text-gray-800 mb-8 text-right md:text-left ">Dashboard</h2>
         { role==='normal' && <CustomerMenu/>}
+        { role==='premium' && <CustomerMenu/>}
       { role==='admin' && <AdminMenu></AdminMenu>}
       </div>
 

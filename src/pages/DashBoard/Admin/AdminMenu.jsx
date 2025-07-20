@@ -28,17 +28,17 @@ export default function AdminMenu() {
       </NavLink>
 
       <NavLink
-        to="/admin/approved-contact-requests"
+        to="/dashboard/approved-contact-request"
         className="flex items-center gap-3 text-gray-700 hover:text-blue-600 font-medium transition"
       >
         <FaEnvelopeOpenText /> Approve Contact Requests
       </NavLink>
       <NavLink
-        to="/admin/success-story"
+        to="/dashboard/admin-success-story"
         className="flex items-center gap-3 text-gray-700 hover:text-blue-600 font-medium transition"
       >
         <RiChatHistoryFill />
- Success Story
+  Success Story
       </NavLink>
 
       
