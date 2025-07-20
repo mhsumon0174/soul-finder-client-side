@@ -3,6 +3,7 @@ import axios from "axios";
 import BioDataCard from "./BioDataCard";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
+
 export default function AllBioData() {
   const [type, setType] = useState("");
   const [division, setDivision] = useState("");
@@ -11,7 +12,7 @@ export default function AllBioData() {
   const [biodatas, setBiodatas] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
+const axiosSecure=useAxiosSecure()
   const limit = 20; 
 
   const fetchBioData = () => {
@@ -25,7 +26,7 @@ export default function AllBioData() {
     query.append("limit", limit);
     query.append("page", page);
 
-    axios.get(`http://localhost:3000/all-bio?${query.toString()}`).then((res) => {
+    axiosSecure.get(`/all-bio?${query.toString()}`).then((res) => {
       setBiodatas(res.data.data);
       setTotalPages(res.data.totalPages);
     });
