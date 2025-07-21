@@ -28,7 +28,7 @@ const AdminDashboardHome = () => {
   });
 
   if (isLoading || !data) {
-    return <Loading/>
+    return <Loading />;
   }
 
   const {
@@ -71,33 +71,56 @@ const AdminDashboardHome = () => {
     ],
   };
 
- const pieOptions = {
-  plugins: {
-    legend: {
-      position: "bottom",
-    },
-    datalabels: {
-      display: false,  // <-- disable labels inside pie slices
-    },
-    tooltip: {
-      callbacks: {
-        label: function (context) {
-          const label = context.label || "";
-          const value = context.parsed;
-          return `${label}: ${value.toLocaleString()}`; // No percentage here either
+  const pieOptions = {
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+      datalabels: {
+        display: false, // disable labels inside pie slices
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            const label = context.label || "";
+            const value = context.parsed;
+            return `${label}: ${value.toLocaleString()}`;
+          },
         },
       },
     },
-  },
-};
-
-
+  };
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
       <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">
         Admin Dashboard Overview
       </h2>
+
+      {/* Added text summary */}
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8 text-center">
+        <div>
+          <p className="text-xl font-semibold text-blue-600">{maleCount.toLocaleString()}</p>
+          <p className="text-sm font-medium text-gray-700">Total Male</p>
+        </div>
+        <div>
+          <p className="text-xl font-semibold text-pink-600">{femaleCount.toLocaleString()}</p>
+          <p className="text-sm font-medium text-gray-700">Total Female</p>
+        </div>
+        <div>
+          <p className="text-xl font-semibold text-yellow-600">{premiumCount.toLocaleString()}</p>
+          <p className="text-sm font-medium text-gray-700">Premium</p>
+        </div>
+        <div>
+          <p className="text-xl font-semibold text-teal-600">{totalBiodata.toLocaleString()}</p>
+          <p className="text-sm font-medium text-gray-700">Total Biodata</p>
+        </div>
+        <div>
+          <p className="text-xl font-semibold text-purple-600">${totalRevenue.toLocaleString()}</p>
+          <p className="text-sm font-medium text-gray-700">Total Revenue</p>
+        </div>
+      </div>
+
       <Pie data={pieData} options={pieOptions} />
     </div>
   );
