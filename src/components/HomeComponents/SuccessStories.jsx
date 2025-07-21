@@ -25,8 +25,7 @@ const sortedStories = [...stories].sort(
 );
 
 
-console.log("Stories before sort:", stories);
-console.log("Stories after sort:", sortedStories);
+
 
   if (isLoading) return <Loading />;
 
