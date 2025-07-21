@@ -52,9 +52,12 @@ export default function Navbar() {
                     src={user.photoURL}
                     alt="User"
                     className="w-8 h-8 rounded-full"
+                     data-tooltip-id="my-tooltip"
+              data-tooltip-content={user.displayName}
                   />
                 ) : (
-                  <FaUser className="w-6 h-6 text-gray-500" />
+                  <FaUser  data-tooltip-id="my-tooltip"
+              data-tooltip-content={user.displayName} className="w-6 h-6 text-gray-500" />
                 )}
                 <button
                   onClick={handleLogout}
@@ -111,7 +114,8 @@ export default function Navbar() {
                     className="w-8 h-8 rounded-full"
                   />
                 ) : (
-                  <FaUser  className="w-6 h-6 text-gray-500" />
+                  <FaUser  className="w-6 h-6 text-gray-500"  data-tooltip-id="my-tooltip"
+              data-tooltip-content={user.displayName} />
                 )}
                 <button
                   onClick={handleLogout}

@@ -8,47 +8,91 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 export default function EditBiodataForm() {
   const { user } = use(AuthContext);
-  const axiosSecure=useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const { data: biodata } = useQuery({
-    queryKey: ['biodata', user?.email],
+    queryKey: ["biodata", user?.email],
     queryFn: async () => {
-      const { data } = await axiosSecure(`/my-bio/${user?.email}`
-      );
+      const { data } = await axiosSecure(`/my-bio/${user?.email}`);
       return data;
     },
-    enabled: !!user?.email,  
+    enabled: !!user?.email,
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-     if (data.age) {
-    data.age = parseInt(data.age); 
-  }
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  // Get the image file
+  const imageFile = formData.get("profileImage");
+
+  if (imageFile && imageFile.size > 0) {
+    // Convert image to base64 string
+    const toBase64 = (file) =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.split(",")[1]); // base64 string only
+        reader.onerror = (error) => reject(error);
+      });
+
     try {
-      const response = await axiosSecure.patch(`/edit-bio-data`, data);
-      console.log("Server response:", response.data);
-      if(response.data){
-         return Swal.fire({
-                    icon: "success",
-                    title: "Congratulations",
-                    text: "You Have Successfully Updated Your Data",
-                    draggable: true,
-                    timer: 1400,
-                  });
-                  
+      const base64Image = await toBase64(imageFile);
+
+      // Upload to imgbb
+      const { data: imgData } = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
+        new URLSearchParams({
+          image: base64Image,
+        })
+      );
+
+
+      if (imgData.success) {
+        data.profileImage = imgData.data.display_url; 
+      } else {
+        throw new Error("Image upload failed");
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Image upload error:", error);
+      return Swal.fire({
+        icon: "error",
+        title: "Image Upload Failed",
+        text: "Please try uploading your image again.",
+      });
     }
-  };
+  }
+
+  if (data.age) {
+    data.age = parseInt(data.age);
+  }
+
+  try {
+    const response = await axiosSecure.patch(`/edit-bio-data`, data);
+    console.log("Server response:", response.data);
+    if (response.data) {
+      return Swal.fire({
+        icon: "success",
+        title: "Congratulations",
+        text: "You Have Successfully Updated Your Data",
+        draggable: true,
+        timer: 1400,
+      });
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+  }
+};
+
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-md my-10">
       <h2 className="text-2xl font-bold mb-6 text-center">Edit Biodata</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
         {/* Biodata Type */}
         <div>
           <label className="block mb-1 font-medium">Biodata Type</label>
@@ -76,15 +120,41 @@ export default function EditBiodataForm() {
           />
         </div>
 
-        {/* Profile Image */}
-        <div>
-          <label className="block mb-1 font-medium">Profile Image URL</label>
-          <input
-            name="profileImage"
-            type="url"
-            defaultValue={biodata?.profileImage || ""}
-            className="w-full border rounded-md px-3 py-2"
-          />
+        
+        {/* Profile Image Upload */}
+        <div className="mb-4">
+          <label className="block mb-1 font-semibold text-gray-700">
+            Upload Profile Image
+          </label>
+
+          <div className="border-2 border-dashed border-indigo-400 bg-indigo-50 rounded-lg p-4 flex items-center justify-center cursor-pointer hover:bg-indigo-100 transition duration-300">
+            <input
+              name="profileImage"
+              type="file"
+              accept="image/*"
+              required={!biodata?.profileImage}
+              className="w-full text-sm text-gray-600
+                 file:mr-4 file:py-2 file:px-4
+                 file:rounded-full file:border-0
+                 file:text-sm file:font-semibold
+                 file:bg-indigo-600 file:text-white
+                 hover:file:bg-indigo-700"
+            />
+            {biodata?.profileImage && (
+  <div className="mt-2 text-center">
+    <p className="text-sm font-medium mb-1">Current Profile Image:</p>
+    <img
+      src={biodata.profileImage}
+      alt="Current Profile"
+      className="mx-auto w-32 h-32 object-cover rounded-full border"
+    />
+    <p className="text-xs text-gray-500 break-all mt-1">
+      {biodata.profileImage}
+    </p>
+  </div>
+)}
+
+          </div>
         </div>
 
         {/* Date of Birth */}
@@ -264,7 +334,9 @@ export default function EditBiodataForm() {
 
         {/* Expected Partner Height */}
         <div>
-          <label className="block mb-1 font-medium">Expected Partner Height</label>
+          <label className="block mb-1 font-medium">
+            Expected Partner Height
+          </label>
           <select
             name="expectedPartnerHeight"
             required
@@ -285,7 +357,9 @@ export default function EditBiodataForm() {
 
         {/* Expected Partner Weight */}
         <div>
-          <label className="block mb-1 font-medium">Expected Partner Weight</label>
+          <label className="block mb-1 font-medium">
+            Expected Partner Weight
+          </label>
           <select
             name="expectedPartnerWeight"
             required
