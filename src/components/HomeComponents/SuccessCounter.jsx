@@ -9,12 +9,14 @@ const SuccessCounter = () => {
     female: 0,
     male: 0,
     married: 0,
+    totalBiodata: 0,
   });
 
   const [animatedCounts, setAnimatedCounts] = useState({
     female: 0,
     male: 0,
     married: 0,
+    totalBiodata: 0,
   });
 
   useEffect(() => {
@@ -23,12 +25,13 @@ const SuccessCounter = () => {
         female: res.data.female || 0,
         male: res.data.male || 0,
         married: res.data.married || 0,
+        totalBiodata: res.data.totalBiodata || 0,
       });
     });
   }, [axiosSecure]);
 
   useEffect(() => {
-    const keys = ["female", "male", "married"];
+    const keys = ["female", "male", "married","totalBiodata"];
     const intervals = [];
 
     keys.forEach((key) => {
@@ -61,7 +64,7 @@ const SuccessCounter = () => {
         At A Glance
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-12 text-center">
         <div className="bg-white rounded-2xl p-8 shadow-md flex flex-col items-center">
           <FaFemale className="text-5xl text-pink-500 mb-4" />
           <p className="text-5xl font-extrabold text-indigo-700">
@@ -77,7 +80,13 @@ const SuccessCounter = () => {
           </p>
           <p className="mt-2 text-lg font-bold text-indigo-600">Men</p>
         </div>
-
+ <div className="bg-white rounded-2xl p-8 shadow-md flex flex-col items-center">
+          <span className="text-5xl text-green-500 mb-4">📄</span>
+          <p className="text-5xl font-extrabold text-indigo-700">
+            {animatedCounts.totalBiodata.toLocaleString()}+
+          </p>
+          <p className="mt-2 text-lg font-bold text-indigo-600">Total Biodatas</p>
+        </div>
         <div className="bg-white rounded-2xl p-8 shadow-md flex flex-col items-center">
           <FaRing className="text-5xl text-yellow-500 mb-4" />
           <p className="text-5xl font-extrabold text-indigo-700">
