@@ -1,48 +1,59 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState, useContext } from "react";
 import BioDataCard from "./BioDataCard";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-
+import { AuthContext } from "../../provider/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/Loading";
 
 export default function AllBioData() {
+  
   const [type, setType] = useState("");
   const [division, setDivision] = useState("");
   const [minAge, setMinAge] = useState("");
   const [maxAge, setMaxAge] = useState("");
-  const [biodatas, setBiodatas] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-const axiosSecure=useAxiosSecure()
-  const limit = 20; 
+  const [biodatas, setBiodatas] = useState([]);
+  const limit = 20;
+  const axiosSecure = useAxiosSecure();
 
-  const fetchBioData = () => {
+  const buildQuery = () => {
     const query = new URLSearchParams();
-
     if (type) query.append("type", type);
     if (division) query.append("division", division);
     if (minAge) query.append("minAge", minAge);
     if (maxAge) query.append("maxAge", maxAge);
-
     query.append("limit", limit);
     query.append("page", page);
-
-    axiosSecure.get(`/all-bio?${query.toString()}`).then((res) => {
-      setBiodatas(res.data.data);
-      setTotalPages(res.data.totalPages);
-    });
+    return query.toString();
   };
 
+  const { data,isLoading, refetch } = useQuery({
+    queryKey: ["all-bio", type, division, minAge, maxAge, page],
+    queryFn: () => axiosSecure.get(`/all-bio?${buildQuery()}`).then((res) => res.data),
+    enabled: false,
+  });
+
+  const fetchBioData = () => {
+    refetch();
+  };
+
+  useEffect(() => {
+    if (data) {
+      setBiodatas(data.data);
+      setTotalPages(data.totalPages);
+    }
+  }, [data]);
 
   useEffect(() => {
     fetchBioData();
   }, [page]);
 
-  
   const applyFilters = () => {
     setPage(1);
     fetchBioData();
   };
-
+  if(isLoading) return <Loading/>
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4 ">
       <aside className="md:w-1/4 w-full bg-white rounded shadow p-4 space-y-4">

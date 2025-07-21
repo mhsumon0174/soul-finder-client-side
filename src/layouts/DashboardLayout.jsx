@@ -6,6 +6,7 @@ import DashboardHome from "../pages/DashBoard/DashBoardHome";
 
 import useRole from "../hooks/useRole";
 import AdminDashboardHome from "../pages/DashBoard/Admin/AdminDashboardHome";
+import Loading from "../components/Loading";
 
 export default function DashboardLayout() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -21,9 +22,7 @@ export default function DashboardLayout() {
   // Optionally, you can handle loading state here
   if (isRoleLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        Loading...
-      </div>
+      <Loading></Loading>
     );
   }
 

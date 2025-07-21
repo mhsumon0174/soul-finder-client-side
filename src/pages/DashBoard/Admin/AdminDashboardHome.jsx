@@ -10,6 +10,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../provider/AuthContext";
+import Loading from "../../../components/Loading";
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
@@ -27,7 +28,7 @@ const AdminDashboardHome = () => {
   });
 
   if (isLoading || !data) {
-    return <div className="text-center py-10">Loading chart...</div>;
+    return <Loading/>
   }
 
   const {

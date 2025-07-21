@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Loading from "../Loading";
 
 const PremiumSection = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,8 +16,8 @@ const PremiumSection = () => {
     },
   });
 
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
-  if (isError) return <p className="text-center text-red-500 py-10">Failed to load premium members.</p>;
+  if (isLoading) return <Loading/>
+  
 
   
   const sortedMembers = premiumMembers
