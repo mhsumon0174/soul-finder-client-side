@@ -1,4 +1,5 @@
 import { FaUsers, FaBullseye, FaHeart } from "react-icons/fa";
+import { Link } from "react-router";
 
 export default function AboutUs() {
   return (
@@ -65,9 +66,9 @@ export default function AboutUs() {
 
             {/* CTA */}
             <div className="pt-6 text-center md:text-left">
-              <button className="bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold shadow-md hover:bg-indigo-700 transition duration-300">
+              <Link to='/register' className="bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold shadow-md hover:bg-indigo-700 transition duration-300">
                 Join Our Mission 💜
-              </button>
+              </Link>
             </div>
           </div>
         </div>
