@@ -20,7 +20,7 @@ Admin Login
 
 3. Premium Biodata Request  
    - Users can request to make their biodata premium  
-   - Admin approves or rejects premium requests
+   - Admin approves premium requests
 
 4. Contact Information Request  
    - Authenticated users can request contact info of others via Stripe payment  
@@ -36,11 +36,11 @@ Admin Login
 
 7. Got Married Success Stories  
    - Users can submit their successful matches  
-   - Admin approves stories to be shown on the success page
+   
 
 8. Favorite System  
    - Logged-in users can mark biodatas as favorite  
-   - Favorites are displayed on a separate page
+   - Favorites biodatas are displayed on users Dashboard 
 
 9. Fully Responsive Design  
    - Optimized for mobile, tablet, and desktop devices
