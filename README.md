@@ -2,7 +2,7 @@
 
 Live Site: [https://assignment-12-cb010.web.app/](https://assignment-12-cb010.web.app/)
 
-
+![Soul-FInder Screenshot](https://i.ibb.co.com/QjTB8Z00/soul-finder.png)
 ---
 
 ## Website Features
