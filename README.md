@@ -2,9 +2,6 @@
 
 Live Site: [https://assignment-12-cb010.web.app/](https://assignment-12-cb010.web.app/)
 
-Admin Login  
-- Email: mh.sumon@gmail.com  
-- Password: Mh1234
 
 ---
 
@@ -57,6 +54,49 @@ Admin Login
 - Authentication: Firebase Auth + JWT  
 - Payment: Stripe  
 - Charts: Recharts
+
+{
+  "react": "^19.1.0",
+  "react-dom": "^19.1.0",
+  "react-router": "^7.6.0",
+  "firebase": "^11.8.0",
+  "tailwindcss": "^4.1.7",
+  "daisyui": "^5.0.35",
+  "sweetalert2": "^11.6.13",
+  "react-icons": "^5.5.0",
+  "react-simple-typewriter": "^5.0.1",
+  "react-tooltip": "^5.28.1",
+  "@tailwindcss/vite": "^4.1.7",
+  "vite": "^6.3.5",
+  "express": "^5.1.0",
+  "mongodb": "^6.16.0",
+  "cors": "^2.8.5",
+  "dotenv": "^16.5.0"
+}
+
+
+## Installation and Running Locally
+Clone the repository from GitHub to your local machine.
+
+Navigate to the frontend directory.
+
+1. Install all frontend dependencies.
+
+2. Start the frontend development server.
+
+3. Open your browser and visit http://localhost:5173 (default Vite port).
+
+4. Open a new terminal window or tab, then navigate to the backend directory named assignment-10-server.
+
+5. Install all backend dependencies.
+
+6. Create a .env file in the backend directory and add your environment variables, for example:
+
+MONGODB_URI=your_mongodb_connection_string
+
+7. Start the backend server.
+
+
 
 ---
 
