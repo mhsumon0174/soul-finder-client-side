@@ -14,7 +14,7 @@ export default function ContactUs() {
     e.target.reset();
   };
   return (
-    <section className="min-h-screen   px-4 sm:px-8">
+    <section className="   px-4 sm:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-16">

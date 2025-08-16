@@ -3,10 +3,9 @@ import { Link } from "react-router";
 
 export default function AboutUs() {
   return (
-    <section className="relative py-20    overflow-hidden">
+    <section className="relative     ">
       {/* Background Accent */}
-      <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px]  rounded-full opacity-30 blur-3xl"></div>
-      <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px]  rounded-full opacity-30 blur-3xl"></div>
+      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 ">
         {/* Header */}

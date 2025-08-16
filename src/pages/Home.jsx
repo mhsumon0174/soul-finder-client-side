@@ -8,6 +8,7 @@ import SuccessCounter from "../components/HomeComponents/SuccessCounter"
 import SuccessStories from "../components/HomeComponents/SuccessStories"
 import AboutUs from "./AboutUs"
 import ContactUs from "./ContactUs"
+import ExtraSection from "./ExtraSection"
 
 export default function Banner() {
   const {user}=use(AuthContext)
@@ -67,6 +68,9 @@ export default function Banner() {
   </div>
   <div className="my-20 md:my-40">
     <ContactUs></ContactUs>
+  </div>
+  <div className="my-20 md:my-40">
+    <ExtraSection></ExtraSection>
   </div>
 
     </>
