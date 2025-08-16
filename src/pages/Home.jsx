@@ -34,7 +34,7 @@ export default function Banner() {
         </p>
 
         <div className="mt-6 flex justify-center gap-4 flex-wrap">
-          <Button asChild className="border-white bg-blue-500 text-white hover:text-white ">
+          <Button asChild className="border-white  text-white hover:bg-yellow-200 hover:text-black ">
             <Link to="/biodatas">Browse Biodatas</Link>
           </Button>
           <Button

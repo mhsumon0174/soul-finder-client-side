@@ -51,7 +51,7 @@ const [role,isRoleLoading]=useRole()
         <NavLink  to="/">
           <button
             
-            className="flex cursor-pointer items-center gap-3 text-red-600 hover:text-red-800 font-medium transition"
+            className="flex cursor-pointer items-center gap-3  hover:text-red-800 font-medium transition"
           >
             <FaBackward/> Home
           </button>
@@ -59,7 +59,7 @@ const [role,isRoleLoading]=useRole()
         <NavLink to="/login">
           <button
             onClick={handleLogout}
-            className="flex cursor-pointer items-center gap-3 text-red-600 hover:text-red-800 font-medium transition"
+            className="flex cursor-pointer items-center gap-3 hover:text-red-800 font-medium transition"
           >
             <FaSignOutAlt /> Logout
           </button>
