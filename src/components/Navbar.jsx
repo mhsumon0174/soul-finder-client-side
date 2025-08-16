@@ -61,7 +61,7 @@ export default function Navbar() {
                 )}
                 <button
                   onClick={handleLogout}
-                  className=" cursor-pointer btn btn-outline text-sm text-gray-700 border border-gray-700 rounded-md px-2 py-1 hover:bg-gray-100"
+                  className=" cursor-pointer btn btn-outline text-sm text-gray-700 border border-gray-700 rounded-md px-2 py-1 hover:bg-yellow-400"
                 >
                   Logout
                 </button>
@@ -69,7 +69,7 @@ export default function Navbar() {
             ) : (
               <Link
                 to="/login"
-                className="text-sm cursor-pointer text-gray-700 border border-gray-700 rounded-md px-3 py-1 hover:bg-gray-100"
+                className="text-sm cursor-pointer text-gray-700 border border-gray-700 rounded-md px-3 py-1 hover:bg-yellow-400"
               >
                 Login
               </Link>
@@ -119,7 +119,7 @@ export default function Navbar() {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 border  border-gray-700 rounded-md text-gray-700 hover:bg-gray-100 transition"
+                  className="px-4 py-2 border  border-gray-700 rounded-md text-gray-700 hover:bg-yellow-400 transition"
                 >
                   Logout
                 </button>
@@ -127,7 +127,7 @@ export default function Navbar() {
             ) : (
               <Link
                 to="/login"
-                className="px-4 py-2 border border-gray-700 rounded-md text-gray-700 hover:bg-gray-100 transition"
+                className="px-4 py-2 border border-gray-700 rounded-md text-gray-700 hover:bg-yellow-400 transition"
               >
                 Login
               </Link>

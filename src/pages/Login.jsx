@@ -9,28 +9,29 @@ import Swal from "sweetalert2";
 import { saveUserInDB } from "../api/utilities";
 
 export default function Login() {
-  const navigate=useNavigate()
-  const location=useLocation()
-  const from = location?.state?.from?.pathname || '/'
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+
   const { signIn, googleSign } = use(AuthContext);
+
   const handleLogIn = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const userData = Object.fromEntries(formData.entries());
     const { email, password } = userData;
+
     signIn(email, password)
       .then((data) => {
         if (data.user) {
-          navigate(from, { replace: true })
-
+          navigate(from, { replace: true });
           return Swal.fire({
             icon: "success",
-            title: "Congratulations",
-            text: "You have successfully registered and logged in",
-            draggable: true,
+            title: "Welcome Back",
+            text: "Logged in successfully!",
             timer: 1400,
+            showConfirmButton: false,
           });
         }
       })
@@ -42,19 +43,20 @@ export default function Login() {
         });
       });
   };
+
   const handleGoogleSignIn = (e) => {
     e.preventDefault();
     googleSign()
       .then((data) => {
-        const {displayName:name,email,photoURL}=data.user
-              saveUserInDB({name,email,photoURL})
-        navigate(from, { replace: true })
+        const { displayName: name, email, photoURL } = data.user;
+        saveUserInDB({ name, email, photoURL });
+        navigate(from, { replace: true });
         return Swal.fire({
           icon: "success",
-          title: "Congratulations",
-          text: "You have successfully  logged in",
-          draggable: true,
+          title: "Welcome!",
+          text: "You have successfully logged in",
           timer: 1400,
+          showConfirmButton: false,
         });
       })
       .catch((error) => {
@@ -67,16 +69,25 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-3xl font-bold text-center mb-6 text-gray-900">
+    <div className=" flex items-center justify-center px-4 ">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 animate-fadeIn">
+        {/* Illustration */}
+        <div className="flex justify-center mb-6">
+          <img
+            src="https://i.ibb.co.com/fVKdqH8Z/online-registration-or-sign-up-login-for-account-on-smartphone-app-user-interface-with-secure-passwo.jpg" // place an SVG/PNG inside your public folder
+            alt="Login illustration"
+            className="w-24 h-24 animate-bounce-slow"
+          />
+        </div>
+
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-900">
           Login to Soulfinder
         </h2>
 
         {/* Google Sign In */}
         <Button
           onClick={handleGoogleSignIn}
-          variant="outline" 
+          variant="outline"
           className="w-full flex items-center justify-center gap-2 cursor-pointer"
         >
           <FcGoogle className="text-xl" />
@@ -95,7 +106,7 @@ export default function Login() {
 
         {/* Email/Password Form */}
         <form onSubmit={handleLogIn} className="space-y-6">
-          <div>
+          <div className="animate-slideUp">
             <label
               htmlFor="email"
               className="block mb-2 text-sm font-medium text-gray-700"
@@ -107,12 +118,13 @@ export default function Login() {
               type="email"
               name="email"
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md 
+              focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Your Email"
             />
           </div>
 
-          <div>
+          <div className="animate-slideUp delay-100">
             <label
               htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-700"
@@ -124,7 +136,8 @@ export default function Login() {
               type="password"
               name="password"
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md 
+              focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Your password"
             />
           </div>
