@@ -34,15 +34,7 @@ export default function DashboardHome() {
     },
   });
 
-  // My biodata type counts (male/female)
-  const { data: myBiodata = [] } = useQuery({
-    queryKey: ["my-biodata", user?.email],
-    enabled: !!user?.email,
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/my-bio/${user?.email}`);
-      return [res.data]; // wrap in array for counting
-    },
-  });
+  
 
  
   const chartData = {
@@ -57,17 +49,27 @@ export default function DashboardHome() {
   };
 
   const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: " Dashboard Overview",
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Dashboard Overview",
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,  // start from 0
+      ticks: {
+        stepSize: 1,      // increments of 1
+        precision: 0,     // remove decimals
       },
     },
-  };
+  },
+};
+
 
   return (
     <div className="p-10">
