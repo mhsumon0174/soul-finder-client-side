@@ -16,6 +16,7 @@ const MyFavouritesTable = () => {
     },
   });
 
+
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
