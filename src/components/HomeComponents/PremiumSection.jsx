@@ -26,7 +26,10 @@ const PremiumSection = () => {
 
   return (
     <section className="mb-12 px-6 md:px-12 lg:px-24 rounded-3xl ">
-      <div className="flex justify-end mb-8 flex-wrap gap-4">
+      
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center  tracking-wide drop-shadow-sm mb-8">
+         Premium Members 
+      </h2><div className="flex justify-end mb-8 flex-wrap gap-4">
         
         <div className="text-sm">
           <label htmlFor="sort" className="font-medium text-gray-700 mr-2">
@@ -36,7 +39,7 @@ const PremiumSection = () => {
             id="sort"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
-            className="border border-pink-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="border border-black rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
@@ -51,7 +54,7 @@ const PremiumSection = () => {
   className="relative bg-white border border-gray-300 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group"
 >
   {/* Top Accent Bar */}
-  <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700" />
+  <div className="absolute top-0 left-0 w-full h-1.5 bg-black" />
 
   {/* Profile Picture */}
   <div className="flex justify-center mt-7">
@@ -94,7 +97,7 @@ const PremiumSection = () => {
 
   <Link
     to={`/biodatas/${member._id}`}
-    className="mt-6 px-8 py-2 rounded-full bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 transition duration-300"
+    className="mt-6 px-3 py-2 rounded-xl bg-blue-500 text-white font-semibold shadow-lg hover:bg-blue-700 transition duration-300"
   >
     View Profile
   </Link>
@@ -102,7 +105,7 @@ const PremiumSection = () => {
 
 
   {/* Premium Badge */}
-  <div className="absolute top-4 right-4 bg-pink-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-widest">
+  <div className="absolute top-4 right-4 bg-gray-100 text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-widest">
     PREMIUM
   </div>
 </div>

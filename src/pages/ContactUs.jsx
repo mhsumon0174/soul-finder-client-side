@@ -14,12 +14,12 @@ export default function ContactUs() {
     e.target.reset();
   };
   return (
-    <section className="min-h-screen  py-20 px-4 sm:px-8">
+    <section className="min-h-screen   px-4 sm:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-extrabold text-gray-800">
-            Let’s <span className="text-indigo-600">Connect</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800">
+            Let’s <span className="text-black">Connect</span>
           </h2>
           <p className="text-gray-600 mt-4 max-w-xl mx-auto text-lg">
             Whether you're looking for love or support, we're here to listen and help.
@@ -74,7 +74,7 @@ export default function ContactUs() {
           {/* Contact Info */}
           <div className="space-y-8">
             <div className="flex items-start gap-4">
-              <FaMapMarkerAlt className="text-indigo-600 w-6 h-6 mt-1" />
+              <FaMapMarkerAlt className="text-black w-6 h-6 mt-1" />
               <div>
                 <h4 className="text-lg font-medium text-gray-800">Our Address</h4>
                 <p className="text-gray-600">123 Dhanmondi/27, Dhaka, Bangladesh</p>
@@ -82,7 +82,7 @@ export default function ContactUs() {
             </div>
 
             <div className="flex items-start gap-4">
-              <FaPhone className="text-indigo-600 w-6 h-6 mt-1" />
+              <FaPhone className="text-black w-6 h-6 mt-1" />
               <div>
                 <h4 className="text-lg font-medium text-gray-800">Phone</h4>
                 <p className="text-gray-600">+8801744508060</p>
@@ -90,7 +90,7 @@ export default function ContactUs() {
             </div>
 
             <div className="flex items-start gap-4">
-              <FaEnvelope className="text-indigo-600 w-6 h-6 mt-1" />
+              <FaEnvelope className="text-black w-6 h-6 mt-1" />
               <div>
                 <h4 className="text-lg font-medium text-gray-800">Email</h4>
                 <p className="text-gray-600">soulfinder@gmail.com</p>

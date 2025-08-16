@@ -43,7 +43,7 @@ const steps = [
 const HowItWorks = () => {
   return (
     <section className="  px-6 md:px-20 lg:px-32 rounded-3xl">
-      <h2 className="text-4xl font-extrabold text-center  mb-12 drop-shadow-md">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center  mb-12 drop-shadow-md">
         How It Works
       </h2>
 

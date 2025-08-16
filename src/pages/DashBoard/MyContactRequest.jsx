@@ -47,7 +47,7 @@ const MyContactRequest = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-12 bg-white rounded-3xl shadow-lg mt-16">
-      <h2 className="text-3xl font-extrabold text-center mb-8 text-indigo-700">
+      <h2 className="text-3xl font-extrabold text-center mb-8 ">
         My Contact Requests
       </h2>
 

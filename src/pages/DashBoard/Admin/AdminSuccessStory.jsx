@@ -56,7 +56,7 @@ const AdminSuccessStory = () => {
 
   <div className="fixed inset-0 flex items-center justify-center p-4">
     <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-lg">
-      <h3 className="text-xl font-semibold text-indigo-600 mb-4 text-center">Success Story</h3>
+      <h3 className="text-xl font-semibold text-black mb-4 text-center">Success Story</h3>
 
       {selectedStory?.coupleImageLink && (
         <img

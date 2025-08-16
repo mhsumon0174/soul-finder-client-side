@@ -31,7 +31,7 @@ const sortedStories = [...stories].sort(
 
   return (
     <section className="max-w-7xl  mx-auto px-6 md:px-12 lg:px-24   rounded-3xl  ">
-      <h2 className="text-4xl font-extrabold text-center  mb-12">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center  mb-12">
         Success Stories
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">

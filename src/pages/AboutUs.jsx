@@ -5,14 +5,14 @@ export default function AboutUs() {
   return (
     <section className="relative py-20    overflow-hidden">
       {/* Background Accent */}
-      <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-indigo-100 rounded-full opacity-30 blur-3xl"></div>
-      <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] bg-purple-100 rounded-full opacity-30 blur-3xl"></div>
+      <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px]  rounded-full opacity-30 blur-3xl"></div>
+      <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px]  rounded-full opacity-30 blur-3xl"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 ">
         {/* Header */}
-        <div className="text-center mb-14 md:mb-36">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
-            About <span className="text-indigo-600">Us</span>
+        <div className="text-center mb-14 ">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 leading-tight">
+            About <span className="text-black">Us</span>
           </h2>
           <p className="text-gray-600 text-md max-w-2xl mx-auto mt-4">
             We’re more than just a platform — we are the bridge between stories, dreams, and a lifetime of companionship.

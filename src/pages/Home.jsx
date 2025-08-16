@@ -6,6 +6,8 @@ import PremiumSection from "../components/HomeComponents/PremiumSection"
 import HowItWorks from "../components/HomeComponents/HowItWorks"
 import SuccessCounter from "../components/HomeComponents/SuccessCounter"
 import SuccessStories from "../components/HomeComponents/SuccessStories"
+import AboutUs from "./AboutUs"
+import ContactUs from "./ContactUs"
 
 export default function Banner() {
   const {user}=use(AuthContext)
@@ -31,13 +33,13 @@ export default function Banner() {
         </p>
 
         <div className="mt-6 flex justify-center gap-4 flex-wrap">
-          <Button asChild className="border-white bg-yellow-100 text-black hover:text-white ">
+          <Button asChild className="border-white bg-blue-500 text-white hover:text-white ">
             <Link to="/biodatas">Browse Biodatas</Link>
           </Button>
           <Button
             asChild
             variant="outline"
-            className="border-white bg-green-500 text-white "
+            className="border-white bg-blue-500 text-white "
           >
            {user? <Link to="/contact-us">Contact Us</Link>:
             <Link to="/register">Join Soulfinder</Link>}
@@ -48,9 +50,7 @@ export default function Banner() {
       
     </section>
   <div className="my-20 md:my-40">
-    <h2 className="text-3xl md:text-4xl font-extrabold text-center  tracking-wide drop-shadow-sm mb-8">
-   Premium Members 
-</h2>
+    
       <PremiumSection></PremiumSection>
   </div>
   <div className="my-20 md:my-40">
@@ -62,6 +62,13 @@ export default function Banner() {
   <div className="my-20 md:my-40">
     <SuccessStories></SuccessStories>
   </div>
+  <div className="my-20 md:my-40">
+    <AboutUs></AboutUs>
+  </div>
+  <div className="my-20 md:my-40">
+    <ContactUs></ContactUs>
+  </div>
+
     </>
   )
 }

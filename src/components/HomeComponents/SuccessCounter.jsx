@@ -49,7 +49,7 @@ const SuccessCounter = () => {
 
   return (
     <section className="  px-6 md:px-20 lg:px-32 rounded-3xl">
-      <h2 className="text-4xl font-extrabold text-center  mb-12">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center  mb-12">
         At A Glance
       </h2>
 
