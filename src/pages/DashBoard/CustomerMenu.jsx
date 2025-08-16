@@ -7,6 +7,7 @@ import {
   FaEnvelope
 } from "react-icons/fa";
 import { GiLovers } from "react-icons/gi";
+import { RiUserFill } from "react-icons/ri";
 
 export default function CustomerMenu() {
   return (
@@ -43,6 +44,12 @@ export default function CustomerMenu() {
         className="flex items-center gap-3 text-gray-700 hover:text-blue-600 font-medium transition"
       >
         <GiLovers/> Got Married?
+      </NavLink>
+      <NavLink
+        to="/dashboard/my-profile"
+        className="flex items-center gap-3 text-gray-700 hover:text-blue-600 font-medium transition"
+      >
+         <RiUserFill /> My Profile
       </NavLink>
     </nav>
   );

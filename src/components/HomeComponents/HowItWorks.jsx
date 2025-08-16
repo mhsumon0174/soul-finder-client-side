@@ -42,16 +42,16 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="bg-gray-50 py-16 px-6 md:px-20 lg:px-32 rounded-3xl shadow-lg mt-16">
-      <h2 className="text-4xl font-extrabold text-center text-blue-800 mb-14 drop-shadow-md">
+    <section className="  px-6 md:px-20 lg:px-32 rounded-3xl">
+      <h2 className="text-4xl font-extrabold text-center  mb-12 drop-shadow-md">
         How It Works
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-5 gap-10 max-w-7xl mx-auto">
         {steps.map((step, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-md hover:shadow-2xl transition-shadow duration-300 cursor-default relative"
+            className="bg-gray-50 rounded-2xl p-8 flex flex-col items-center text-center shadow-md hover:shadow-2xl transition-shadow duration-300 cursor-default relative"
           >
             <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 text-white text-3xl mb-6 animate-pulse hover:animate-none transition-transform duration-300 transform hover:scale-110">
               {step.icon}

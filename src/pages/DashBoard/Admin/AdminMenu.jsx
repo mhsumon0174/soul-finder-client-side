@@ -6,7 +6,7 @@ import {
   FaEnvelopeOpenText,
   FaSignOutAlt,
 } from "react-icons/fa";
-import { RiChatHistoryFill } from "react-icons/ri";
+import { RiChatHistoryFill, RiUserFill } from "react-icons/ri";
 
 export default function AdminMenu() {
   return (
@@ -39,6 +39,13 @@ export default function AdminMenu() {
       >
         <RiChatHistoryFill />
   Success Story
+      </NavLink>
+      <NavLink
+        to="/dashboard/profile"
+        className="flex items-center gap-3 text-gray-700 hover:text-blue-600 font-medium transition"
+      >
+        <RiUserFill />
+ Profile
       </NavLink>
 
       

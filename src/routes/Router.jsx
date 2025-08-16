@@ -20,6 +20,8 @@ import ManageUsers from "../pages/DashBoard/Admin/ManageUsers";
 import ApprovedPremium from "../pages/DashBoard/Admin/ApprovedPremium";
 import ApprovedContactRequest from "../pages/DashBoard/Admin/ApprovedContactRequest";
 import AdminSuccessStory from "../pages/DashBoard/Admin/AdminSuccessStory";
+import Profile from "../pages/DashBoard/Admin/Profile";
+import UserProfile from "../pages/DashBoard/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +105,12 @@ const router = createBrowserRouter([
         </PrivateRoute>
       },
       {
+        path: "/dashboard/my-profile",
+        element:<PrivateRoute>
+         <UserProfile></UserProfile>
+        </PrivateRoute>
+      },
+      {
         path:'/dashboard/manage-users',
         element:<PrivateRoute>
           <ManageUsers></ManageUsers>
@@ -126,6 +134,12 @@ const router = createBrowserRouter([
          <AdminSuccessStory/>
         </PrivateRoute>
       },
+      {
+        path:'/dashboard/profile',
+        element:<PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>
+      }
 
     ],
   },

@@ -8,5 +8,5 @@ export const saveUserInDB = async user => {
     user
   )
 
-  console.log(data)
+ 
 }

@@ -28,7 +28,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-50 shadow-sm">
+    <nav className="bg-gray-50 border-b border-gray-200 fixed top-0 left-0 right-0 z-50 shadow-sm">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo + Website Name */}
@@ -61,7 +61,7 @@ export default function Navbar() {
                 )}
                 <button
                   onClick={handleLogout}
-                  className=" cursor-pointer text-sm text-gray-700 border border-gray-700 rounded-md px-2 py-1 hover:bg-gray-100"
+                  className=" cursor-pointer btn btn-outline text-sm text-gray-700 border border-gray-700 rounded-md px-2 py-1 hover:bg-gray-100"
                 >
                   Logout
                 </button>
@@ -119,7 +119,7 @@ export default function Navbar() {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 border border-gray-700 rounded-md text-gray-700 hover:bg-gray-100 transition"
+                  className="px-4 py-2 border  border-gray-700 rounded-md text-gray-700 hover:bg-gray-100 transition"
                 >
                   Logout
                 </button>

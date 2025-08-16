@@ -7,9 +7,9 @@ import PremiumSection from '../components/HomeComponents/PremiumSection';
 
 const HomeLayout = () => {
     return (
-        <div>
+        <div className=''>
             <Navbar></Navbar>
-            <div className='my-30'>
+            <div className='my-30 container mx-auto'>
                 <Outlet>
               
             </Outlet>

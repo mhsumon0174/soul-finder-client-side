@@ -25,7 +25,7 @@ const PremiumSection = () => {
     
 
   return (
-    <section className="my-12 px-6 md:px-12 lg:px-24 rounded-3xl py-10">
+    <section className="mb-12 px-6 md:px-12 lg:px-24 rounded-3xl ">
       <div className="flex justify-end mb-8 flex-wrap gap-4">
         
         <div className="text-sm">
