@@ -1,4 +1,4 @@
-# SoulFinder - Matrimony Platform
+# Soul Finder - Marriage & Matchmaking Portal
 
 Live Site: [https://assignment-12-cb010.web.app/](https://assignment-12-cb010.web.app/)
 
